@@ -1,0 +1,227 @@
+.lawsuit-status-card {
+    padding: 28px;
+    margin-bottom: 28px;
+}
+
+.lawsuit-status-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.status-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.status-icon.sent {
+    color: var(--emerald-light);
+}
+
+.status-icon.warning {
+    color: var(--amber-light);
+}
+
+.lawsuit-status-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.lawsuit-status-header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.warning-card {
+    border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.email-details {
+    margin-top: 16px;
+}
+
+.email-details summary {
+    cursor: pointer;
+    color: var(--primary-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 8px 0;
+}
+
+.email-content {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    font-family: monospace;
+    margin-top: 8px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.section-heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+/* Procedure Steps */
+.procedure-section {
+    margin-bottom: 32px;
+}
+
+.procedure-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.procedure-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.step-content p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.step-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--primary-light);
+    font-weight: 500;
+}
+
+.step-done {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--emerald-light);
+    font-weight: 600;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+/* Platforms Grid */
+.platforms-section {
+    margin-bottom: 32px;
+}
+
+.platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.platform-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.platform-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(59, 130, 246, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-light);
+    flex-shrink: 0;
+}
+
+.platform-card h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.platform-card p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.overdue-card {
+    border-color: rgba(239, 68, 68, 0.4) !important;
+}
+
+.deadline-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.overdue-tag {
+    color: var(--red-light);
+    font-weight: 700;
+}
+
+.admin-remarks {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: rgba(59, 130, 246, 0.06);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+    .platforms-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .procedure-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
