@@ -291,6 +291,53 @@
     border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
+/* AI Govt Order collapsible section */
+.govt-order-section {
+    margin-bottom: 14px;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.govt-order-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(139, 92, 246, 0.07);
+    border: none;
+    color: #a78bfa;
+    font-family: var(--font-family);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    text-align: left;
+}
+
+.govt-order-toggle span {
+    flex: 1;
+}
+
+.govt-order-toggle:hover {
+    background: rgba(139, 92, 246, 0.14);
+}
+
+.govt-order-content {
+    background: rgba(15, 23, 42, 0.7);
+    padding: 16px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    font-family: monospace;
+    max-height: 350px;
+    overflow-y: auto;
+    border-top: 1px solid rgba(139, 92, 246, 0.15);
+    margin: 0;
+}
+
 @media (max-width: 768px) {
     .filter-tabs {
         overflow-x: auto;

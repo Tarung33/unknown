@@ -176,7 +176,20 @@ const getComplaintById = async (req, res) => {
 const getAdminComplaints = async (req, res) => {
     try {
         const query = {
-            status: { $in: ['sent_to_admin', 'admin_approved', 'admin_rejected'] },
+            status: {
+                $in: [
+                    'sent_to_admin',
+                    'admin_approved',
+                    'admin_rejected',
+                    'sent_to_authority',
+                    'replied',
+                    'user_resolved',
+                    'user_not_resolved',
+                    'resolved',
+                    'escalated',
+                    'lawsuit_filed',
+                ],
+            },
         };
 
         // Filter by department if admin

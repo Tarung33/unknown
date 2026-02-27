@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { getAdminComplaints, adminActionOnComplaint, requestUserData } from '../services/api';
 import API from '../services/api';
-import { FiCheck, FiX, FiDatabase, FiRefreshCw, FiSend, FiUser, FiPhone, FiBriefcase } from 'react-icons/fi';
+import { FiCheck, FiX, FiDatabase, FiRefreshCw, FiSend, FiUser, FiPhone, FiBriefcase, FiFileText, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import './AdminPanel.css';
 
 const AdminPanel = () => {
@@ -14,6 +14,9 @@ const AdminPanel = () => {
     const [actionLoading, setActionLoading] = useState('');
     const [filter, setFilter] = useState('all');
     const [message, setMessage] = useState({ type: '', text: '' });
+    const [expandedOrder, setExpandedOrder] = useState({}); // track which complaint's order is expanded
+
+    const toggleOrder = (id) => setExpandedOrder(prev => ({ ...prev, [id]: !prev[id] }));
 
     const fetchAll = async () => {
         try {
@@ -172,6 +175,23 @@ const AdminPanel = () => {
                                         <span>AI Score: <strong>{complaint.aiAnalysis.score}/100</strong></span>
                                         <span>Severity: <strong className={`text-${complaint.aiAnalysis.severity}`}>{complaint.aiAnalysis.severity}</strong></span>
                                         <span>Category: <strong>{complaint.aiAnalysis.category}</strong></span>
+                                    </div>
+                                )}
+
+                                {/* AI Government Order Document */}
+                                {complaint.govtOrderDoc?.content && (
+                                    <div className="govt-order-section">
+                                        <button
+                                            className="govt-order-toggle"
+                                            onClick={() => toggleOrder(complaint.complaintId)}
+                                        >
+                                            <FiFileText />
+                                            <span>AI Government Order Document</span>
+                                            {expandedOrder[complaint.complaintId] ? <FiChevronUp /> : <FiChevronDown />}
+                                        </button>
+                                        {expandedOrder[complaint.complaintId] && (
+                                            <pre className="govt-order-content">{complaint.govtOrderDoc.content}</pre>
+                                        )}
                                     </div>
                                 )}
 

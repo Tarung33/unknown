@@ -312,7 +312,7 @@ const ComplaintTracker = () => {
                             <h3>⚖️ Lawsuit Filed</h3>
                             <p>A legal notice has been sent to the authority.</p>
                             <Link to={`/lawsuit/${complaint.complaintId}`} className="btn btn-outline">
-                                <FiExternalLink /> View Lawsuit Details &amp; Filing Procedure
+                                <FiExternalLink /> View Lawsuit Details & Filing Procedure
                             </Link>
                         </div>
                     )}

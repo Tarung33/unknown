@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { getAuthorityComplaints, authorityActionOnComplaint } from '../services/api';
-import { FiMessageSquare, FiRefreshCw, FiClock, FiAlertTriangle, FiSend } from 'react-icons/fi';
+import { FiMessageSquare, FiRefreshCw, FiClock, FiAlertTriangle, FiSend, FiFileText, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import './AuthorityPanel.css';
 
 const AuthorityPanel = () => {
@@ -12,6 +12,9 @@ const AuthorityPanel = () => {
     const [actionLoading, setActionLoading] = useState('');
     const [message, setMessage] = useState({ type: '', text: '' });
     const [filter, setFilter] = useState('pending');
+    const [expandedOrder, setExpandedOrder] = useState({});
+
+    const toggleOrder = (id) => setExpandedOrder(prev => ({ ...prev, [id]: !prev[id] }));
 
     const fetchComplaints = async () => {
         try {
@@ -144,6 +147,23 @@ const AuthorityPanel = () => {
 
                             {complaint.adminRemarks && (
                                 <div className="admin-remarks"><strong>Admin Remarks:</strong> {complaint.adminRemarks}</div>
+                            )}
+
+                            {/* AI Government Order Document */}
+                            {complaint.govtOrderDoc?.content && (
+                                <div className="govt-order-section">
+                                    <button
+                                        className="govt-order-toggle"
+                                        onClick={() => toggleOrder(complaint.complaintId)}
+                                    >
+                                        <FiFileText />
+                                        <span>AI Government Order Document</span>
+                                        {expandedOrder[complaint.complaintId] ? <FiChevronUp /> : <FiChevronDown />}
+                                    </button>
+                                    {expandedOrder[complaint.complaintId] && (
+                                        <pre className="govt-order-content">{complaint.govtOrderDoc.content}</pre>
+                                    )}
+                                </div>
                             )}
 
                             {/* User's resolution feedback */}
