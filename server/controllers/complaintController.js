@@ -84,23 +84,33 @@ const submitComplaint = async (req, res) => {
                 });
                 await complaint.save();
 
-                // Analyze complaint
-                const analysis = await aiService.analyzeComplaint(complaint);
+                // Analyze complaint — returns { analysis, embedding }
+                // Pass documents so Gemini Vision can analyse uploaded images
+                const { analysis, embedding } = await aiService.analyzeComplaint(complaint, complaint.documents || []);
                 complaint.aiAnalysis = analysis;
+
+                // Persist vector embedding for future RAG similarity searches
+                if (embedding && embedding.length > 0) {
+                    complaint.embedding = embedding;
+                    console.log(`🔢 Embedding stored for ${complaint.complaintId} (${embedding.length} dims)`);
+                }
 
                 if (analysis.isValid) {
                     // Generate government order
                     const govtOrder = await aiService.generateGovtOrder(complaint, analysis);
                     complaint.govtOrderDoc = govtOrder;
                     complaint.status = 'verified';
+
+                    const imgNote = analysis.evidenceScore != null
+                        ? ` Image evidence score: ${analysis.evidenceScore}/100.`
+                        : '';
                     complaint.statusHistory.push({
                         status: 'verified',
-                        message: `AI analysis complete. Complaint verified with score ${analysis.score}/100. Government order generated.`,
+                        message: `AI analysis complete. Score: ${analysis.score}/100.${imgNote} Government order generated.`,
                         timestamp: new Date(),
                         updatedBy: 'ai_system',
                     });
 
-                    // Auto-route to admin (set status to sent_to_admin)
                     complaint.status = 'sent_to_admin';
                     complaint.statusHistory.push({
                         status: 'sent_to_admin',
@@ -112,7 +122,7 @@ const submitComplaint = async (req, res) => {
                     complaint.status = 'ai_rejected';
                     complaint.statusHistory.push({
                         status: 'ai_rejected',
-                        message: `AI analysis flagged this complaint: ${analysis.verdict}. Flags: ${analysis.flags.join(', ')}`,
+                        message: `AI flagged this complaint: ${analysis.verdict}. Flags: ${analysis.flags.join(', ')}`,
                         timestamp: new Date(),
                         updatedBy: 'ai_system',
                     });

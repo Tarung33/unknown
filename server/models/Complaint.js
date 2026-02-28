@@ -129,6 +129,11 @@ const complaintSchema = new mongoose.Schema({
         feedback: { type: String, default: '' },
         resolvedAt: Date,
     },
+    embedding: {               // Gemini vector embedding for semantic search
+        type: [Number],
+        default: [],
+        select: false,         // don't return by default (large array)
+    },
     escalationDeadline: {
         type: Date,
         default: null,
@@ -156,12 +161,41 @@ const complaintSchema = new mongoose.Schema({
     timestamps: true,
 });
 
+const Counter = require('./Counter');
+
 // Generate complaint ID before saving
 complaintSchema.pre('validate', async function (next) {
     if (!this.complaintId) {
-        const count = await mongoose.model('Complaint').countDocuments();
-        const padded = String(count + 1).padStart(6, '0');
-        this.complaintId = `CS-${padded}`;
+        try {
+            // Atomically increment the sequence
+            const counter = await Counter.findByIdAndUpdate(
+                { _id: 'complaintId' },
+                { $inc: { seq: 1 } },
+                { new: true, upsert: true } // Create if doesn't exist
+            );
+
+            // If the database already had CS-000012 before we added this counter,
+            // we need to sync the counter to start higher than 12.
+            // On the first run, let's fast-forward it if needed.
+            if (counter.seq === 1) {
+                const highest = await mongoose.model('Complaint').findOne({}, 'complaintId').sort({ createdAt: -1 });
+                if (highest && highest.complaintId) {
+                    const parts = highest.complaintId.split('-');
+                    if (parts.length === 2 && !isNaN(parts[1])) {
+                        const maxVal = parseInt(parts[1], 10);
+                        if (maxVal >= 1) {
+                            counter.seq = maxVal + 1;
+                            await counter.save();
+                        }
+                    }
+                }
+            }
+
+            const padded = String(counter.seq).padStart(6, '0');
+            this.complaintId = `CS-${padded}`;
+        } catch (err) {
+            return next(err);
+        }
     }
     next();
 });

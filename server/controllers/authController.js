@@ -140,4 +140,18 @@ const getProfile = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, loginUser, loginAdmin, getProfile };
+// @desc    Get all authorities (for admin dropdown)
+// @route   GET /api/authorities
+const getAuthorities = async (req, res) => {
+    try {
+        const authorities = await Admin.find({ role: 'authority' })
+            .select('name email department designation phone')
+            .sort({ department: 1, name: 1 });
+        res.json(authorities);
+    } catch (error) {
+        console.error('Get authorities error:', error);
+        res.status(500).json({ message: 'Server error fetching authorities' });
+    }
+};
+
+module.exports = { registerUser, loginUser, loginAdmin, getProfile, getAuthorities };

@@ -11,6 +11,7 @@ import ComplaintTracker from './pages/ComplaintTracker';
 import AdminPanel from './pages/AdminPanel';
 import AuthorityPanel from './pages/AuthorityPanel';
 import LawsuitPage from './pages/LawsuitPage';
+import LandingPage from './pages/LandingPage';
 
 const AppContent = () => {
     const { user, loading } = useAuth();
@@ -73,8 +74,8 @@ const AppContent = () => {
                     </ProtectedRoute>
                 } />
 
-                {/* Default */}
-                <Route path="/" element={<Navigate to={user ? "/dashboard" : "/login"} />} />
+                {/* Default — Landing page for guests, dashboard for logged-in users */}
+                <Route path="/" element={user ? <Navigate to="/dashboard" /> : <LandingPage />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </>

@@ -1,0 +1,878 @@
+/* ═══════════════════════════════════════════════════════════════
+   CIVIC SHIELD — Landing Page
+   Century Gothic · Elegant Black & White
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Century Gothic font stack (system + fallback) ── */
+.landing {
+    font-family: 'Century Gothic', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    background: #ffffff;
+    color: #0a0a0a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── Scroll-reveal ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* ════════════════ NAV ════════════════ */
+.land-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.land-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.land-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.land-logo-icon {
+    font-size: 1.4rem;
+}
+
+.land-logo-text {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: -0.3px;
+    font-family: 'Century Gothic', 'Gill Sans MT', sans-serif;
+}
+
+.land-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.land-nav-link {
+    padding: 8px 16px;
+    border-radius: 6px;
+    color: #555;
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-decoration: none;
+    font-family: 'Century Gothic', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.land-nav-link:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #000;
+}
+
+.land-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.land-nav-login {
+    padding: 9px 22px;
+    border: 1.5px solid rgba(0, 0, 0, 0.18);
+    border-radius: 6px;
+    color: #222;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.land-nav-login:hover {
+    border-color: #000;
+    background: rgba(0, 0, 0, 0.04);
+    color: #000;
+}
+
+.land-nav-register {
+    padding: 9px 22px;
+    background: #000;
+    color: #fff;
+    border: 1.5px solid #000;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.land-nav-register:hover {
+    background: #222;
+    border-color: #222;
+}
+
+/* ════════════════ HERO ════════════════ */
+.land-hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 32px 80px;
+    position: relative;
+}
+
+/* Background grid lines */
+.hero-bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #666;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.hero-title {
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: #000;
+    margin-bottom: 24px;
+    font-family: 'Century Gothic', 'Gill Sans MT', sans-serif;
+}
+
+.hero-title-accent {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-title-accent::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #000;
+    border-radius: 2px;
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.75;
+    max-width: 500px;
+    margin-bottom: 40px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.btn-hero-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 32px;
+    background: #000;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    font-family: 'Century Gothic', sans-serif;
+    letter-spacing: 0.2px;
+}
+
+.btn-hero-primary:hover {
+    background: #222;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.btn-arrow {
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+}
+
+.btn-hero-primary:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.btn-hero-outline {
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 32px;
+    border: 1.5px solid rgba(0, 0, 0, 0.22);
+    color: #222;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.btn-hero-outline:hover {
+    border-color: #000;
+    background: rgba(0, 0, 0, 0.04);
+    color: #000;
+}
+
+.hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.hero-stat-num {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #000;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.hero-stat-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+}
+
+.hero-stat-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.12);
+}
+
+/* ── Hero complaint card mock ── */
+.hero-visual {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-card-mock {
+    background: #fff;
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.10);
+    max-width: 420px;
+    margin-left: auto;
+    animation: cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.mock-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.mock-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    border: 1px solid #ccc;
+}
+
+.mock-dot:first-child {
+    background: #000;
+    border-color: #000;
+}
+
+.mock-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #333;
+    margin-left: 8px;
+    letter-spacing: 0.3px;
+}
+
+.mock-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 18px;
+    letter-spacing: 0.2px;
+}
+
+.mock-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.mock-field:last-of-type {
+    border-bottom: none;
+}
+
+.mock-label {
+    font-size: 0.72rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.mock-value {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #111;
+}
+
+.mock-high {
+    background: #000;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.68rem;
+}
+
+.mock-sent {
+    color: #444;
+}
+
+.mock-order {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: #f8f8f8;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 14px;
+}
+
+.mock-progress {
+    height: 5px;
+    background: #f0f0f0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.mock-progress-bar {
+    height: 100%;
+    background: #000;
+    border-radius: 3px;
+    animation: barGrow 2.5s ease-out forwards;
+}
+
+@keyframes barGrow {
+    from {
+        width: 0 !important;
+    }
+}
+
+.mock-progress-label {
+    font-size: 0.68rem;
+    color: #888;
+}
+
+/* ════════════════ SECTION BASE ════════════════ */
+.land-section {
+    padding: 100px 32px;
+    background: #ffffff;
+}
+
+.land-section-alt {
+    background: #f8f8f8;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.land-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #888;
+    margin-bottom: 16px;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.section-title {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 800;
+    color: #000;
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+    font-family: 'Century Gothic', 'Gill Sans MT', sans-serif;
+}
+
+.section-sub {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 60px;
+    max-width: 480px;
+    line-height: 1.7;
+}
+
+/* ── Hero scroll-down indicator ── */
+.hero-scroll-down {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Century Gothic', sans-serif;
+    transition: color 0.2s;
+    animation: scrollPulse 2.5s ease-in-out infinite;
+}
+
+.hero-scroll-down:hover {
+    color: #000;
+}
+
+.scroll-arrow {
+    font-size: 1.1rem;
+}
+
+@keyframes scrollPulse {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateY(5px);
+        opacity: 1;
+    }
+}
+
+/* ════════════════ OVERVIEW ════════════════ */
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.overview-text {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.85;
+}
+
+.overview-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.overview-pillar {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    background: #f8f8f8;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 12px;
+    transition: all 0.25s ease;
+}
+
+.overview-pillar:hover {
+    background: #fff;
+    border-color: rgba(0, 0, 0, 0.16);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+    transform: translateX(4px);
+}
+
+.pillar-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.pillar-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 3px;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.pillar-desc {
+    font-size: 0.78rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ════════════════ FEATURES ════════════════ */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.feature-card {
+    background: #fff;
+    border: 1.5px solid rgba(0, 0, 0, 0.09);
+    border-radius: 14px;
+    padding: 28px 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #000;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-card:hover {
+    border-color: rgba(0, 0, 0, 0.20);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.feature-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+    font-family: 'Century Gothic', sans-serif;
+    letter-spacing: -0.2px;
+}
+
+.feature-desc {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* ════════════════ HOW IT WORKS ════════════════ */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    position: relative;
+}
+
+.step-card {
+    padding: 32px 28px;
+    position: relative;
+    border-right: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.step-card:nth-child(3n) {
+    border-right: none;
+}
+
+.step-card:nth-child(n+4) {
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.step-num {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.07);
+    line-height: 1;
+    margin-bottom: 14px;
+    font-family: 'Century Gothic', sans-serif;
+    letter-spacing: -2px;
+}
+
+.step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.step-desc {
+    font-size: 0.84rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* ════════════════ CTA ════════════════ */
+.land-cta {
+    padding: 120px 32px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+}
+
+.land-cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 18px;
+    font-family: 'Century Gothic', 'Gill Sans MT', sans-serif;
+}
+
+.cta-sub {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+/* CTA buttons — inverted for dark bg */
+.land-cta .btn-hero-primary {
+    background: #fff;
+    color: #000;
+}
+
+.land-cta .btn-hero-primary:hover {
+    background: #f0f0f0;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+}
+
+.land-cta .btn-hero-outline {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.land-cta .btn-hero-outline:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+/* ════════════════ FOOTER ════════════════ */
+.land-footer {
+    padding: 28px 32px;
+    background: #000;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.land-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.land-footer .land-logo-text {
+    color: #fff;
+}
+
+.footer-copy {
+    font-size: 0.76rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.2px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-family: 'Century Gothic', sans-serif;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+/* ════════════════ RESPONSIVE ════════════════ */
+@media (max-width: 900px) {
+    .land-hero {
+        grid-template-columns: 1fr;
+        padding-top: 100px;
+        text-align: center;
+    }
+
+    .hero-title-accent::after {
+        display: none;
+    }
+
+    .hero-subtitle {
+        margin: 0 auto 40px;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-stats {
+        justify-content: center;
+    }
+
+    .hero-card-mock {
+        max-width: 380px;
+        margin: 0 auto;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .step-card {
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .step-card:last-child {
+        border-bottom: none;
+    }
+
+    .step-card:nth-child(n+4) {
+        border-top: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .land-nav-inner {
+        padding: 0 20px;
+    }
+
+    .land-hero {
+        padding: 100px 20px 60px;
+        gap: 40px;
+    }
+
+    .land-section {
+        padding: 72px 20px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .land-footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}

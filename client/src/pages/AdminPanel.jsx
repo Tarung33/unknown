@@ -175,6 +175,14 @@ const AdminPanel = () => {
                                         <span>AI Score: <strong>{complaint.aiAnalysis.score}/100</strong></span>
                                         <span>Severity: <strong className={`text-${complaint.aiAnalysis.severity}`}>{complaint.aiAnalysis.severity}</strong></span>
                                         <span>Category: <strong>{complaint.aiAnalysis.category}</strong></span>
+                                        {complaint.aiAnalysis.evidenceScore != null && (
+                                            <span>Image Evidence: <strong>{complaint.aiAnalysis.evidenceScore}/100</strong></span>
+                                        )}
+                                        {complaint.aiAnalysis.imageVerdict && complaint.aiAnalysis.imageVerdict !== 'No images provided' && (
+                                            <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', width: '100%', marginTop: 4 }}>
+                                                🖼️ {complaint.aiAnalysis.imageVerdict}
+                                            </span>
+                                        )}
                                     </div>
                                 )}
 
@@ -192,6 +200,33 @@ const AdminPanel = () => {
                                         {expandedOrder[complaint.complaintId] && (
                                             <pre className="govt-order-content">{complaint.govtOrderDoc.content}</pre>
                                         )}
+                                    </div>
+                                )}
+
+                                {/* Attached Documents */}
+                                {complaint.documents?.length > 0 && (
+                                    <div className="attached-docs-section">
+                                        <p className="attached-docs-label"><FiFileText /> Attached Documents ({complaint.documents.length})</p>
+                                        <div className="attached-docs-list">
+                                            {complaint.documents.map((doc, idx) => {
+                                                const isImage = doc.mimetype?.startsWith('image/');
+                                                const url = `http://localhost:5000/uploads/${doc.filename}`;
+                                                return (
+                                                    <a
+                                                        key={idx}
+                                                        href={url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="attached-doc-item"
+                                                        title={doc.originalName}
+                                                    >
+                                                        <span className="doc-icon">{isImage ? '🖼️' : '📄'}</span>
+                                                        <span className="doc-name">{doc.originalName}</span>
+                                                        <span className="doc-view">View ↗</span>
+                                                    </a>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
                                 )}
 

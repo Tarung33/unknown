@@ -166,6 +166,33 @@ const AuthorityPanel = () => {
                                 </div>
                             )}
 
+                            {/* Attached Documents */}
+                            {complaint.documents?.length > 0 && (
+                                <div className="attached-docs-section">
+                                    <p className="attached-docs-label"><FiFileText /> Attached Documents ({complaint.documents.length})</p>
+                                    <div className="attached-docs-list">
+                                        {complaint.documents.map((doc, idx) => {
+                                            const isImage = doc.mimetype?.startsWith('image/');
+                                            const url = `http://localhost:5000/uploads/${doc.filename}`;
+                                            return (
+                                                <a
+                                                    key={idx}
+                                                    href={url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="attached-doc-item"
+                                                    title={doc.originalName}
+                                                >
+                                                    <span className="doc-icon">{isImage ? '🖼️' : '📄'}</span>
+                                                    <span className="doc-name">{doc.originalName}</span>
+                                                    <span className="doc-view">View ↗</span>
+                                                </a>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+
                             {/* User's resolution feedback */}
                             {['user_resolved', 'user_not_resolved'].includes(complaint.status) && complaint.userResolution && (
                                 <div className={`user-resolution-box ${complaint.userResolution.accepted ? 'resolved' : 'not-resolved'}`}>

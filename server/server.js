@@ -8,7 +8,10 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const complaintRoutes = require('./routes/complaintRoutes');
 const escalationService = require('./services/escalationService');
+const localEmbedding = require('./services/localEmbedding');
 const Admin = require('./models/Admin');
+const { protect, adminOnly } = require('./middleware/authMiddleware');
+const { getAuthorities } = require('./controllers/authController');
 
 const app = express();
 
@@ -26,6 +29,9 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
+
+// Authorities list — used by admin dropdown to forward complaints
+app.get('/api/authorities', protect, adminOnly, getAuthorities);
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -135,8 +141,11 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`\n🛡️  Civic Shield Server running on port ${PORT}`);
     console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`   API: http://localhost:${PORT}/api\n`);
+
+    // Backfill TF-IDF embeddings for existing complaints (after DB connects)
+    setTimeout(() => localEmbedding.backfillEmbeddings(), 5000);
 });

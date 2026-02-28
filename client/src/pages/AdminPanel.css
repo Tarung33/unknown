@@ -325,17 +325,77 @@
 }
 
 .govt-order-content {
-    background: rgba(15, 23, 42, 0.7);
+    background: #f8f8f8;
     padding: 16px;
     font-size: 0.75rem;
-    color: var(--text-secondary);
+    color: #333333;
     line-height: 1.7;
     white-space: pre-wrap;
     font-family: monospace;
     max-height: 350px;
     overflow-y: auto;
-    border-top: 1px solid rgba(139, 92, 246, 0.15);
+    border-top: 1px solid rgba(0, 0, 0, 0.10);
     margin: 0;
+}
+
+/* Attached Documents */
+.attached-docs-section {
+    margin-bottom: 14px;
+}
+
+.attached-docs-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.attached-docs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.attached-doc-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #f5f5f5;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    max-width: 220px;
+}
+
+.attached-doc-item:hover {
+    border-color: #000000;
+    background: #ebebeb;
+}
+
+.doc-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.doc-name {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 130px;
+}
+
+.doc-view {
+    font-size: 0.7rem;
+    color: var(--primary-light);
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 @media (max-width: 768px) {
